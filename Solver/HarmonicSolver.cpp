@@ -55,22 +55,22 @@ HarmonicSolver::HarmonicSolver(Mesh* mp,SteadyReader* srp,SteadyJacobian* sjp,Ut
 	up->VectorInitializer(resIm,4,0);
 
 	for(int i=0;i<celltot;i++){										//initializing real and img conservative variables
-		wr[i][0]=wr0;			wi[i][0]=wi0;
-		wr[i][1]=wr1;			wi[i][1]=wi1;
-		wr[i][2]=wr2;			wi[i][2]=wi2;
-		wr[i][3]=wr3;			wi[i][3]=wi3;
+		wr[i][0]=wr1;			wi[i][0]=wi1;
+		wr[i][1]=wr2;			wi[i][1]=wi2;
+		wr[i][2]=wr3;			wi[i][2]=wi3;
+		wr[i][3]=wr4;			wi[i][3]=wi4;
 	}
 
 	cout<<"\nSolution is initialized as below for all cells"<<endl;
-	cout<<"wReal0    wReal1    wReal2   wReal3     wImag0    wImag1    wImag2     wImag3"<<endl;
+	cout<<"W1Real    W1Imag    W2Real   W2Imag     W3Real    W3Imag    W4Real     W4Imag"<<endl;
 	cout<<"--------------------------------------------------------------------------------------------"<<endl;
-	cout<<wr0<<"  "<<wr1<<"  "<<wr2<<"  "<<wr3<<"  "<<wi0<<"  "<<wi1<<"  "<<wi2<<"  "<<wi3<<endl;
+	cout<<wr1<<"     "<<wi1<<"     "<<wr2<<"     "<<wi2<<"     "<<wr3<<"     "<<wi3<<"     "<<wr4<<"     "<<wi4<<endl;
 
-	//double tCritical=tStagIn/(1+0.5*(gamma-1));					//critical temperature
-	//double aCritical=sqrt(gamma*R*tCritical);						//critical speed of sound
-	//radiF=redF*aCritical/Leng;															//radial frequency
-	radiF=1;
-	cout<<"\nRadial frequency is "<<radiF<<" rad/sec"<<endl;
+	omega=2*pi*F;
+	cout<<"\nReduced frequency is "<<F<<" Hz"<<endl;
+	cout<<"\nRedial frequency is "<<omega<<" rad/sec"<<endl;
+
+
 
 	LocalTimeStep lts(mp,srp,dt);															//create local time step object and calculate time step
 
@@ -96,8 +96,8 @@ HarmonicSolver::HarmonicSolver(Mesh* mp,SteadyReader* srp,SteadyJacobian* sjp,Ut
 
 void HarmonicSolver::Itterator(){
 	cout<<"\nIteration is started."<<endl;
-	cout<<"\n-------------------Resuduals----------------"<<endl;
-	cout<<"#------------ro_Real--------ro_Imag--------ro.u_Real--------ro.u_Imagl--------ro.v_Real--------ro.v_Imag--------ro.e_Real--------ro.e_Imag"<<endl;
+	cout<<"\n-------------------------------------Resuduals---------------------------------"<<endl;
+	cout<<"#------W1Real------W1Imag------W2Real------W2Imag------W3Real------W3Imag------W4Real------W4Imag"<<endl;
 	double alpha[]={0.666,0.666,1};
 	double maxResidue=100;
 	itr=0;
@@ -117,8 +117,8 @@ void HarmonicSolver::Itterator(){
 				ocp->ClaculateCellFlux(cn);						//calculating real and imag fluxes of a cell
 
 				for (int j=0;j<4;j++){								//updating conservative variables
-					dwr[cn][j]=(radiF*wi[cn][j]-cellFluxReal[j]/vol[cn])*dt[cn];			//variation in wreal[i] of cell cn
-					dwi[cn][j]=(-radiF*wr[cn][j]-cellFluxImag[j]/vol[cn])*dt[cn];			//variation in wimag[i] of cell cn
+					dwr[cn][j]=(omega*wi[cn][j]-cellFluxReal[j]/vol[cn])*dt[cn];			//variation in wreal[i] of cell cn
+					dwi[cn][j]=(-omega*wr[cn][j]-cellFluxImag[j]/vol[cn])*dt[cn];			//variation in wimag[i] of cell cn
 					wr[cn][j]=wrOld[cn][j]+alpha[rk]*dwr[cn][j];			//updating wreal cell cn
 					wi[cn][j]=wiOld[cn][j]+alpha[rk]*dwi[cn][j];			//updatong wimag cell cn
 				}	//end up variable update loop

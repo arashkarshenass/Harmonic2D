@@ -34,7 +34,7 @@ private:
 	double* cellFluxImag=nullptr;			//total imag fluxes of a cell
 	double* resR=nullptr;					//real residues
 	double* resIm=nullptr;					//imaginary resudies
-	double radiF=0;								//radial frequency
+	double omega=0;
 	OneCell* ocp=nullptr;					//pointer to one cell object
 	Residue* rp=nullptr;						//pointer to residue object
 	Utility* up=nullptr;						//ponter to utility object

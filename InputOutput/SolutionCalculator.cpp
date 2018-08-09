@@ -135,9 +135,9 @@ SolutionCalculator::SolutionCalculator(Mesh*mp,SteadyReader*srp,HarmonicSolver*h
 
 
 	//convert solution into time domain
-	double periodTime=1/redF;						//period of oscilation in seconds
+	double periodTime=1/F;						//period of oscilation in seconds
 	instantTotal=periodDevision+1;				//number of time instants to calculate solution at
-	double radialFreq=2*pi/periodTime;				//radial frequency
+	double omega=2*pi*F;						//radial frequency
 	dt=periodTime/periodDevision;			//it includes time=0, time=inst1, time=inst2, ... and time =T
 	double time[instantTotal]={0};					//instants in which solution is required 	0 <= time <= T
 	for (int i=0;i<instantTotal;i++)
@@ -175,24 +175,24 @@ SolutionCalculator::SolutionCalculator(Mesh*mp,SteadyReader*srp,HarmonicSolver*h
 		harmonicSinus[t].time=time[t];
 		harmonicCosinus[t].time=time[t];
 		for(int cn=0;cn<cellTotal;cn++){
-			harmonicSinus[t].w1[cn]=amplitude.w1[cn]*sin(radialFreq*time[t]+phi.w1[cn]);
-			harmonicSinus[t].w2[cn]=amplitude.w2[cn]*sin(radialFreq*time[t]+phi.w2[cn]);
-			harmonicSinus[t].w3[cn]=amplitude.w3[cn]*sin(radialFreq*time[t]+phi.w3[cn]);
-			harmonicSinus[t].w4[cn]=amplitude.w4[cn]*sin(radialFreq*time[t]+phi.w4[cn]);
-			harmonicSinus[t].rho[cn]=amplitude.rho[cn]*sin(radialFreq*time[t]+phi.rho[cn]);
-			harmonicSinus[t].u[cn]=amplitude.u[cn]*sin(radialFreq*time[t]+phi.u[cn]);
-			harmonicSinus[t].v[cn]=amplitude.v[cn]*sin(radialFreq*time[t]+phi.v[cn]);
-			harmonicSinus[t].P[cn]=amplitude.P[cn]*sin(radialFreq*time[t]+phi.P[cn]);
-			harmonicSinus[t].M[cn]=amplitude.M[cn]*sin(radialFreq*time[t]+phi.M[cn]);
-			harmonicCosinus[t].w1[cn]=amplitude.w1[cn]*cos(radialFreq*time[t]+phi.w1[cn]);
-			harmonicCosinus[t].w2[cn]=amplitude.w2[cn]*cos(radialFreq*time[t]+phi.w2[cn]);
-			harmonicCosinus[t].w3[cn]=amplitude.w3[cn]*cos(radialFreq*time[t]+phi.w3[cn]);
-			harmonicCosinus[t].w4[cn]=amplitude.w4[cn]*cos(radialFreq*time[t]+phi.w4[cn]);
-			harmonicCosinus[t].rho[cn]=amplitude.rho[cn]*cos(radialFreq*time[t]+phi.rho[cn]);
-			harmonicCosinus[t].u[cn]=amplitude.u[cn]*cos(radialFreq*time[t]+phi.u[cn]);
-			harmonicCosinus[t].v[cn]=amplitude.v[cn]*cos(radialFreq*time[t]+phi.v[cn]);
-			harmonicCosinus[t].P[cn]=amplitude.P[cn]*cos(radialFreq*time[t]+phi.P[cn]);
-			harmonicCosinus[t].M[cn]=amplitude.M[cn]*cos(radialFreq*time[t]+phi.M[cn]);
+			harmonicSinus[t].w1[cn]=amplitude.w1[cn]*sin(omega*time[t]+phi.w1[cn]);
+			harmonicSinus[t].w2[cn]=amplitude.w2[cn]*sin(omega*time[t]+phi.w2[cn]);
+			harmonicSinus[t].w3[cn]=amplitude.w3[cn]*sin(omega*time[t]+phi.w3[cn]);
+			harmonicSinus[t].w4[cn]=amplitude.w4[cn]*sin(omega*time[t]+phi.w4[cn]);
+			harmonicSinus[t].rho[cn]=amplitude.rho[cn]*sin(omega*time[t]+phi.rho[cn]);
+			harmonicSinus[t].u[cn]=amplitude.u[cn]*sin(omega*time[t]+phi.u[cn]);
+			harmonicSinus[t].v[cn]=amplitude.v[cn]*sin(omega*time[t]+phi.v[cn]);
+			harmonicSinus[t].P[cn]=amplitude.P[cn]*sin(omega*time[t]+phi.P[cn]);
+			harmonicSinus[t].M[cn]=amplitude.M[cn]*sin(omega*time[t]+phi.M[cn]);
+			harmonicCosinus[t].w1[cn]=amplitude.w1[cn]*cos(omega*time[t]+phi.w1[cn]);
+			harmonicCosinus[t].w2[cn]=amplitude.w2[cn]*cos(omega*time[t]+phi.w2[cn]);
+			harmonicCosinus[t].w3[cn]=amplitude.w3[cn]*cos(omega*time[t]+phi.w3[cn]);
+			harmonicCosinus[t].w4[cn]=amplitude.w4[cn]*cos(omega*time[t]+phi.w4[cn]);
+			harmonicCosinus[t].rho[cn]=amplitude.rho[cn]*cos(omega*time[t]+phi.rho[cn]);
+			harmonicCosinus[t].u[cn]=amplitude.u[cn]*cos(omega*time[t]+phi.u[cn]);
+			harmonicCosinus[t].v[cn]=amplitude.v[cn]*cos(omega*time[t]+phi.v[cn]);
+			harmonicCosinus[t].P[cn]=amplitude.P[cn]*cos(omega*time[t]+phi.P[cn]);
+			harmonicCosinus[t].M[cn]=amplitude.M[cn]*cos(omega*time[t]+phi.M[cn]);
 		}
 	}
 

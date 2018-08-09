@@ -74,10 +74,10 @@ void Residue::FirstIteration(){
 
 	//print first iteration residue
 	cout<<setw(7)<<fixed<<left<<1
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[0]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[0]
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[1]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[1]
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[2]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[2]
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[3]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[3]<<endl;
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[0]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[0]
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[1]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[1]
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[2]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[2]
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[3]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[3]<<endl;
 
 }
 
@@ -133,10 +133,10 @@ void Residue::CalculateResidue(int itr){
 	resIm[3]=log10(resIm[3]);
 
 	cout<<setw(7)<<fixed<<left<<itr
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[0]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[0]
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[1]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[1]
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[2]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[2]
-	<<setw(8)<<setprecision(3)<<fixed<<left<<resR[3]<<setw(8)<<setprecision(3)<<fixed<<left<<resIm[3]<<endl;
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[0]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[0]
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[1]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[1]
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[2]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[2]
+	<<setw(12)<<setprecision(3)<<fixed<<left<<resR[3]<<setw(12)<<setprecision(3)<<fixed<<left<<resIm[3]<<endl;
 }
 
 double Residue::findMax(){

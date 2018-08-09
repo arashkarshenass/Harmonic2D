@@ -21,9 +21,6 @@
 #include <cstdio>
 #include <iostream>
 #include <ctime>
-
-
-
 using namespace std;
 
 //--------Inputs----------
@@ -35,7 +32,7 @@ int main(){
 	clock_t time_start=clock();
 	cout<<"------Program is started-----"<<endl;
 	char meshName[]="NASA_2D_C++.su2";     		//name of mesh file
-	char steadyName[]="Fluent_Steady_2nOrder_AUSN.dat";			//name of steady solutin file
+	char steadyName[]="Code_Steady_Contour.dat";			//name of steady solutin file
 
 	Utility utility;
 

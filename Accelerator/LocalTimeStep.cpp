@@ -15,6 +15,6 @@ LocalTimeStep::LocalTimeStep(Mesh* mp,SteadyReader* srp,double* dt) {
 		V=sqrt(u*u+v*v);
 		a=sqrt(gamma*qs[i][3]/qs[i][0]);
 		S=a+V;
-		dt[i]=minDis[i]/S;
+		dt[i]=minDis[i]/S*cfl;
 	}
 }
