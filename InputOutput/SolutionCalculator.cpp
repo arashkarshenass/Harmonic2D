@@ -144,76 +144,113 @@ SolutionCalculator::SolutionCalculator(Mesh*mp,SteadyReader*srp,HarmonicSolver*h
 		time[i]=i*dt;
 
 
-	harmonic=new TimeSolution[instantTotal];		//array structure to store harmonic solution at different times
+	harmonicSinus=new TimeSolution[instantTotal];		//array structure to store sinus harmonic solution at different times
 	for (int t=0;t<instantTotal;t++){
-		harmonic[t].w1=new double[cellTotal];
-		harmonic[t].w2=new double[cellTotal];
-		harmonic[t].w3=new double[cellTotal];
-		harmonic[t].w4=new double[cellTotal];
-		harmonic[t].rho=new double[cellTotal];
-		harmonic[t].u=new double[cellTotal];
-		harmonic[t].v=new double[cellTotal];
-		harmonic[t].P=new double[cellTotal];
-		harmonic[t].M=new double[cellTotal];
+		harmonicSinus[t].w1=new double[cellTotal];
+		harmonicSinus[t].w2=new double[cellTotal];
+		harmonicSinus[t].w3=new double[cellTotal];
+		harmonicSinus[t].w4=new double[cellTotal];
+		harmonicSinus[t].rho=new double[cellTotal];
+		harmonicSinus[t].u=new double[cellTotal];
+		harmonicSinus[t].v=new double[cellTotal];
+		harmonicSinus[t].P=new double[cellTotal];
+		harmonicSinus[t].M=new double[cellTotal];
 	}
 
+	harmonicCosinus=new TimeSolution[instantTotal];		//array structure to store cosinus harmonic solution at different times
 	for (int t=0;t<instantTotal;t++){
-		harmonic[t].time=time[t];
-		if(harmonicType==1)
-			for(int cn=0;cn<cellTotal;cn++){
-				harmonic[t].w1[cn]=amplitude.w1[cn]*sin(radialFreq*time[t]+phi.w1[cn]);
-				harmonic[t].w2[cn]=amplitude.w2[cn]*sin(radialFreq*time[t]+phi.w2[cn]);
-				harmonic[t].w3[cn]=amplitude.w3[cn]*sin(radialFreq*time[t]+phi.w3[cn]);
-				harmonic[t].w4[cn]=amplitude.w4[cn]*sin(radialFreq*time[t]+phi.w4[cn]);
-				harmonic[t].rho[cn]=amplitude.rho[cn]*sin(radialFreq*time[t]+phi.rho[cn]);
-				harmonic[t].u[cn]=amplitude.u[cn]*sin(radialFreq*time[t]+phi.u[cn]);
-				harmonic[t].v[cn]=amplitude.v[cn]*sin(radialFreq*time[t]+phi.v[cn]);
-				harmonic[t].P[cn]=amplitude.P[cn]*sin(radialFreq*time[t]+phi.P[cn]);
-				harmonic[t].M[cn]=amplitude.M[cn]*sin(radialFreq*time[t]+phi.M[cn]);
-			}
-		else if(harmonicType==2)
-			for(int cn=0;cn<cellTotal;cn++){
-				harmonic[t].w1[cn]=amplitude.w1[cn]*cos(radialFreq*time[t]+phi.w1[cn]);
-				harmonic[t].w2[cn]=amplitude.w2[cn]*cos(radialFreq*time[t]+phi.w2[cn]);
-				harmonic[t].w3[cn]=amplitude.w3[cn]*cos(radialFreq*time[t]+phi.w3[cn]);
-				harmonic[t].w4[cn]=amplitude.w4[cn]*cos(radialFreq*time[t]+phi.w4[cn]);
-				harmonic[t].rho[cn]=amplitude.rho[cn]*cos(radialFreq*time[t]+phi.rho[cn]);
-				harmonic[t].u[cn]=amplitude.u[cn]*cos(radialFreq*time[t]+phi.u[cn]);
-				harmonic[t].v[cn]=amplitude.v[cn]*cos(radialFreq*time[t]+phi.v[cn]);
-				harmonic[t].P[cn]=amplitude.P[cn]*cos(radialFreq*time[t]+phi.P[cn]);
-				harmonic[t].M[cn]=amplitude.M[cn]*cos(radialFreq*time[t]+phi.M[cn]);
-			}
+		harmonicCosinus[t].w1=new double[cellTotal];
+		harmonicCosinus[t].w2=new double[cellTotal];
+		harmonicCosinus[t].w3=new double[cellTotal];
+		harmonicCosinus[t].w4=new double[cellTotal];
+		harmonicCosinus[t].rho=new double[cellTotal];
+		harmonicCosinus[t].u=new double[cellTotal];
+		harmonicCosinus[t].v=new double[cellTotal];
+		harmonicCosinus[t].P=new double[cellTotal];
+		harmonicCosinus[t].M=new double[cellTotal];
+	}
+
+
+	for (int t=0;t<instantTotal;t++){
+		harmonicSinus[t].time=time[t];
+		harmonicCosinus[t].time=time[t];
+		for(int cn=0;cn<cellTotal;cn++){
+			harmonicSinus[t].w1[cn]=amplitude.w1[cn]*sin(radialFreq*time[t]+phi.w1[cn]);
+			harmonicSinus[t].w2[cn]=amplitude.w2[cn]*sin(radialFreq*time[t]+phi.w2[cn]);
+			harmonicSinus[t].w3[cn]=amplitude.w3[cn]*sin(radialFreq*time[t]+phi.w3[cn]);
+			harmonicSinus[t].w4[cn]=amplitude.w4[cn]*sin(radialFreq*time[t]+phi.w4[cn]);
+			harmonicSinus[t].rho[cn]=amplitude.rho[cn]*sin(radialFreq*time[t]+phi.rho[cn]);
+			harmonicSinus[t].u[cn]=amplitude.u[cn]*sin(radialFreq*time[t]+phi.u[cn]);
+			harmonicSinus[t].v[cn]=amplitude.v[cn]*sin(radialFreq*time[t]+phi.v[cn]);
+			harmonicSinus[t].P[cn]=amplitude.P[cn]*sin(radialFreq*time[t]+phi.P[cn]);
+			harmonicSinus[t].M[cn]=amplitude.M[cn]*sin(radialFreq*time[t]+phi.M[cn]);
+			harmonicCosinus[t].w1[cn]=amplitude.w1[cn]*cos(radialFreq*time[t]+phi.w1[cn]);
+			harmonicCosinus[t].w2[cn]=amplitude.w2[cn]*cos(radialFreq*time[t]+phi.w2[cn]);
+			harmonicCosinus[t].w3[cn]=amplitude.w3[cn]*cos(radialFreq*time[t]+phi.w3[cn]);
+			harmonicCosinus[t].w4[cn]=amplitude.w4[cn]*cos(radialFreq*time[t]+phi.w4[cn]);
+			harmonicCosinus[t].rho[cn]=amplitude.rho[cn]*cos(radialFreq*time[t]+phi.rho[cn]);
+			harmonicCosinus[t].u[cn]=amplitude.u[cn]*cos(radialFreq*time[t]+phi.u[cn]);
+			harmonicCosinus[t].v[cn]=amplitude.v[cn]*cos(radialFreq*time[t]+phi.v[cn]);
+			harmonicCosinus[t].P[cn]=amplitude.P[cn]*cos(radialFreq*time[t]+phi.P[cn]);
+			harmonicCosinus[t].M[cn]=amplitude.M[cn]*cos(radialFreq*time[t]+phi.M[cn]);
+		}
 	}
 
 
 	//combine steady and harmonic to get unsteady
-	unsteady=new TimeSolution[instantTotal];		//array structure to store unsteady solution at different times
+	unsteadySinus=new TimeSolution[instantTotal];		//array structure to store unsteady sinus solution at different times
 	for (int t=0;t<instantTotal;t++){
-		unsteady[t].w1=new double[cellTotal];
-		unsteady[t].w2=new double[cellTotal];
-		unsteady[t].w3=new double[cellTotal];
-		unsteady[t].w4=new double[cellTotal];
-		unsteady[t].rho=new double[cellTotal];
-		unsteady[t].u=new double[cellTotal];
-		unsteady[t].v=new double[cellTotal];
-		unsteady[t].P=new double[cellTotal];
-		unsteady[t].M=new double[cellTotal];
+		unsteadySinus[t].w1=new double[cellTotal];
+		unsteadySinus[t].w2=new double[cellTotal];
+		unsteadySinus[t].w3=new double[cellTotal];
+		unsteadySinus[t].w4=new double[cellTotal];
+		unsteadySinus[t].rho=new double[cellTotal];
+		unsteadySinus[t].u=new double[cellTotal];
+		unsteadySinus[t].v=new double[cellTotal];
+		unsteadySinus[t].P=new double[cellTotal];
+		unsteadySinus[t].M=new double[cellTotal];
 	}
 
+	unsteadyCosinus=new TimeSolution[instantTotal];		//array structure to store unsteady cosinus solution at different times
 	for (int t=0;t<instantTotal;t++){
-		unsteady[t].time=time[t];
+		unsteadyCosinus[t].w1=new double[cellTotal];
+		unsteadyCosinus[t].w2=new double[cellTotal];
+		unsteadyCosinus[t].w3=new double[cellTotal];
+		unsteadyCosinus[t].w4=new double[cellTotal];
+		unsteadyCosinus[t].rho=new double[cellTotal];
+		unsteadyCosinus[t].u=new double[cellTotal];
+		unsteadyCosinus[t].v=new double[cellTotal];
+		unsteadyCosinus[t].P=new double[cellTotal];
+		unsteadyCosinus[t].M=new double[cellTotal];
+	}
+
+
+	for (int t=0;t<instantTotal;t++){
+		unsteadySinus[t].time=time[t];
+		unsteadyCosinus[t].time=time[t];
 		for(int cn=0;cn<cellTotal;cn++){
-			unsteady[t].w1[cn]=rhoSteady[cn] + harmonic[t].w1[cn];
-			unsteady[t].w2[cn]=rhoSteady[cn]*uSteady[cn] + harmonic[t].w2[cn];
-			unsteady[t].w3[cn]=rhoSteady[cn]*vSteady[cn] + harmonic[t].w3[cn];
-			unsteady[t].w4[cn]=(pSteady[cn]/(gamma-1) + rhoSteady[cn]*sSteady[cn]*sSteady[cn]) + harmonic[t].w4[cn];
-			unsteady[t].rho[cn]=rhoSteady[cn] + harmonic[t].rho[cn];
-			unsteady[t].u[cn]=uSteady[cn] + harmonic[t].u[cn];
-			unsteady[t].v[cn]=vSteady[cn] + harmonic[t].v[cn];
-			unsteady[t].P[cn]=pSteady[cn] + harmonic[t].P[cn];
-			unsteady[t].M[cn]=mSteady[cn] + harmonic[t].M[cn];
+			unsteadySinus[t].w1[cn]=rhoSteady[cn] + harmonicSinus[t].w1[cn];
+			unsteadySinus[t].w2[cn]=rhoSteady[cn]*uSteady[cn] + harmonicSinus[t].w2[cn];
+			unsteadySinus[t].w3[cn]=rhoSteady[cn]*vSteady[cn] + harmonicSinus[t].w3[cn];
+			unsteadySinus[t].w4[cn]=(pSteady[cn]/(gamma-1) + rhoSteady[cn]*sSteady[cn]*sSteady[cn]) + harmonicSinus[t].w4[cn];
+			unsteadySinus[t].rho[cn]=rhoSteady[cn] + harmonicSinus[t].rho[cn];
+			unsteadySinus[t].u[cn]=uSteady[cn] + harmonicSinus[t].u[cn];
+			unsteadySinus[t].v[cn]=vSteady[cn] + harmonicSinus[t].v[cn];
+			unsteadySinus[t].P[cn]=pSteady[cn] + harmonicSinus[t].P[cn];
+			unsteadySinus[t].M[cn]=mSteady[cn] + harmonicSinus[t].M[cn];
+			unsteadyCosinus[t].w1[cn]=rhoSteady[cn] + harmonicCosinus[t].w1[cn];
+			unsteadyCosinus[t].w2[cn]=rhoSteady[cn]*uSteady[cn] + harmonicCosinus[t].w2[cn];
+			unsteadyCosinus[t].w3[cn]=rhoSteady[cn]*vSteady[cn] + harmonicCosinus[t].w3[cn];
+			unsteadyCosinus[t].w4[cn]=(pSteady[cn]/(gamma-1) + rhoSteady[cn]*sSteady[cn]*sSteady[cn]) + harmonicCosinus[t].w4[cn];
+			unsteadyCosinus[t].rho[cn]=rhoSteady[cn] + harmonicCosinus[t].rho[cn];
+			unsteadyCosinus[t].u[cn]=uSteady[cn] + harmonicCosinus[t].u[cn];
+			unsteadyCosinus[t].v[cn]=vSteady[cn] + harmonicCosinus[t].v[cn];
+			unsteadyCosinus[t].P[cn]=pSteady[cn] + harmonicCosinus[t].P[cn];
+			unsteadyCosinus[t].M[cn]=mSteady[cn] + harmonicCosinus[t].M[cn];
 		}
 	}
+
+
 }
 
 double SolutionCalculator::PhiCalculator(double real,double imag){
@@ -264,12 +301,20 @@ Frequency* SolutionCalculator::GetPhi(){
 	return &phi;
 }
 
-TimeSolution* SolutionCalculator::GetHarmonic(){
-	return harmonic;
+TimeSolution* SolutionCalculator::GetHarmonicSinus(){
+	return harmonicSinus;
 }
 
-TimeSolution* SolutionCalculator::GetUnsteady(){
-	return unsteady;
+TimeSolution* SolutionCalculator::GetHarmonicCosinus(){
+	return harmonicCosinus;
+}
+
+TimeSolution* SolutionCalculator::GetUnsteadySinus(){
+	return unsteadySinus;
+}
+
+TimeSolution* SolutionCalculator::GetUnsteadyCosinus(){
+	return unsteadyCosinus;
 }
 
 int SolutionCalculator::GetInstantNumber(){

@@ -24,8 +24,10 @@ public:
 	double PhiCalculator(double,double);
 	Frequency* GetAmplitude();
 	Frequency* GetPhi();
-	TimeSolution* GetHarmonic();
-	TimeSolution* GetUnsteady();
+	TimeSolution* GetHarmonicSinus();
+	TimeSolution* GetHarmonicCosinus();
+	TimeSolution* GetUnsteadySinus();
+	TimeSolution* GetUnsteadyCosinus();
 	int GetInstantNumber();
 	double GetDt();
 
@@ -34,8 +36,10 @@ private:
 	double dt=0;
 	Frequency amplitude;
 	Frequency phi;
-	TimeSolution* harmonic;
-	TimeSolution* unsteady;
+	TimeSolution* harmonicSinus;
+	TimeSolution* harmonicCosinus;
+	TimeSolution* unsteadySinus;
+	TimeSolution* unsteadyCosinus;
 
 };
 

@@ -20,6 +20,7 @@
 #include "Utility/Utility.h"
 #include <cstdio>
 #include <iostream>
+#include <ctime>
 
 
 
@@ -29,11 +30,12 @@ using namespace std;
 //through input header file
 
 
-int main()
-{
+int main(){
+
+	clock_t time_start=clock();
 	cout<<"------Program is started-----"<<endl;
 	char meshName[]="NASA_2D_C++.su2";     		//name of mesh file
-	char steadyName[]="Code_NT_AUSM.dat";			//name of steady solutin file
+	char steadyName[]="Fluent_Steady_2nOrder_AUSN.dat";			//name of steady solutin file
 
 	Utility utility;
 
@@ -46,5 +48,9 @@ int main()
 	HarmonicSolver hrmslvObj(&mesh,&readObj,&jacObj,&utility);		//create object hrmnSlv with constructor to prepare harmonic solver
 	SolutionCalculator finalSolution(&mesh,&readObj,&hrmslvObj);
 	TecPlotEr tecplotSave(&mesh,&finalSolution);
+	clock_t time_end=clock();
+	cout<<"Program has terminated successfully :)"<<endl;
+	cout<<"Run time: "<<(time_end - time_start)/(double)CLOCKS_PER_SEC<<endl;
+
 	return 0;
 }
